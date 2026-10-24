@@ -1,0 +1,17 @@
+{
+  "layout": "poster tipografi raksasa: situs = 1 karcis raksasa, kata kota = pintu zoom-through",
+  "fonts": {
+    "display": "Stylish"
+  },
+  "palette": {
+    "mode": "mid",
+    "harmony": "triadic"
+  },
+  "motion": {
+    "camera": "zoom-through teks pintu"
+  },
+  "domain": "tukang parkir",
+  "icons": {
+    "style": "duotone custom hand-built (karcis, palang, helm, motor) + Bootstrap Icons"
+  }
+}

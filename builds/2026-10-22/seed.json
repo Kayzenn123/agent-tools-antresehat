@@ -1,0 +1,38 @@
+{
+  "seed": "2026-10-22",
+  "totalFontsInPool": 1958,
+  "domain": "arisan",
+  "layout": "canvas pan/zoom dengan titik konten",
+  "reference": "risograph 2-3 warna",
+  "constraint": "hanya 3 ukuran font",
+  "motion": {
+    "camera": "parallax 5 layer + zoom out di akhir",
+    "marquee": "3 band beda kecepatan bertumpuk",
+    "text": "split huruf flip 3D",
+    "input": "tilt 3D pointer/gyro",
+    "reveal": "GSAP Flip layout"
+  },
+  "icons": {
+    "style": "monoline satu garis menyambung",
+    "source": "custom hand-built SVG"
+  },
+  "fonts": {
+    "display": "Playwrite HR Lijeva",
+    "body": "Anek Bangla",
+    "accent": "Mansalva"
+  },
+  "palette": {
+    "mode": "dark",
+    "harmony": "complementary",
+    "baseHue": 35,
+    "bg": "oklch(0.17 0.033 35)",
+    "surface": "oklch(0.21 0.040 35)",
+    "text": "oklch(0.94 0.020 35)",
+    "muted": "oklch(0.65 0.030 35)",
+    "accent": "oklch(0.68 0.237 215)",
+    "accent2": "oklch(0.65 0.150 215)",
+    "pop": "oklch(0.79 0.271 191)",
+    "note": "Draf. Wajib cek kontras AA dan rapikan lightness/chroma."
+  },
+  "buildDate": "2026-10-22"
+}

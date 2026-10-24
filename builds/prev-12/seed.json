@@ -1,0 +1,17 @@
+{
+  "layout": "kartu bertumpuk bisa diseret",
+  "fonts": {
+    "display": "Noto Sans Lisu"
+  },
+  "palette": {
+    "mode": "dark",
+    "harmony": "monochrome"
+  },
+  "motion": {
+    "camera": "zoom scrub+drag flick"
+  },
+  "domain": "daftar harga bengkel",
+  "icons": {
+    "style": "isometrik custom SVG"
+  }
+}

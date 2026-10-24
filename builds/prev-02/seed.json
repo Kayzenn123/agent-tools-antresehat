@@ -1,0 +1,17 @@
+{
+  "layout": "koran multi-kolom",
+  "fonts": {
+    "display": "Bricolage Grotesque"
+  },
+  "palette": {
+    "mode": "light",
+    "harmony": "analogous"
+  },
+  "motion": {
+    "camera": "pan horizontal pinned"
+  },
+  "domain": "daftar harga bengkel",
+  "icons": {
+    "style": "outline tebal 3px sudut tajam"
+  }
+}

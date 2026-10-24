@@ -1,0 +1,17 @@
+{
+  "layout": "horizontal scroll penuh",
+  "fonts": {
+    "display": "Metamorphous"
+  },
+  "palette": {
+    "mode": "dark",
+    "harmony": "triadic"
+  },
+  "motion": {
+    "camera": "zoom-through teks jadi pintu"
+  },
+  "domain": "jalur sepeda",
+  "icons": {
+    "style": "monoline satu garis menyambung"
+  }
+}

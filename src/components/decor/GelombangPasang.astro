@@ -1,0 +1,22 @@
+---
+/**
+ * GelombangPasang — SVG gelombang untuk morph target #gelombang.
+ * Modul motion/pasang (di index.js) menulis ulang atribut `d` path
+ * mengikuti jumlah antrean menunggu (data-driven, bukan dekorasi mati).
+ * Struktur DOM yang diharapkan motion:
+ *   <div id="gelombang"><svg …><path id="gelombang-path" d="…"/></svg></div>
+ */
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+
+// gelombang awal: 2 bukit landai (akan di-morph JS)
+const D_AWAL =
+  'M0,64 C120,40 240,40 360,64 C480,88 600,88 720,64 C840,40 960,40 1080,64 C1200,88 1320,88 1440,64 L1440,120 L0,120 Z';
+---
+<div id="gelombang" class={cls} aria-hidden="true">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false">
+    <path id="gelombang-path" d={D_AWAL}></path>
+  </svg>
+</div>

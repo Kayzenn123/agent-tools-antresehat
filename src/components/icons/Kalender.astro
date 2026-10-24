@@ -1,0 +1,24 @@
+---
+/** Kalender — gaya garis putus-putus 2px, sudut tajam. */
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+<svg
+  class={cls}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-dasharray="3.5 2.5"
+  stroke-linecap="square"
+  stroke-linejoin="miter"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d="M4 6h16v14H4z" />
+  <path d="M4 10h16" />
+  <path d="M8 3v4M16 3v4" />
+  <path d="M8 14h2M12 14h2M16 14h0M8 18h2M12 18h2" stroke-dasharray="2 2" />
+</svg>

@@ -1,0 +1,97 @@
+/* ==========================================================================
+   tokens.css — ANTRESEHAT design tokens (final agen C, 2026-10-24)
+   Palet: monokromatik hue 82 (kertas krem kehijauan + tinta + stempel ungu).
+   SEMUA token warna LOLOS cek kontras WCAG via `node scripts/cek-kontras.js`
+   (terakhir jalan: 2026-10-24, exit 0 — 7/7 cek lolos).
+   Penyesuaian dari BRIEF (hanya LIGHTNESS, hue/chroma utuh):
+     --muted  L 0.38 -> 0.34   (muted/bg  4.72:1)
+     --accent L 0.50 -> 0.34   (accent/bg 4.78:1)
+     --pop    L 0.58 -> 0.54   (pop/surface 3.10:1, grafis besar)
+   ========================================================================== */
+
+:root {
+  /* --- warna --- */
+  --bg: oklch(0.72 0.09 82); /* kertas krem kehijauan (60%) — teks/bg 7.54:1 */
+  --surface: oklch(0.81 0.065 82); /* kertas terang / sel aktif (30%) */
+  --text: oklch(0.18 0.03 82); /* tinta — vs bg 7.54:1 */
+  --muted: oklch(0.34 0.035 82); /* tinta pudar — vs bg 4.72:1 */
+  --accent: oklch(0.34 0.17 82); /* hijau lumut — vs bg 4.78:1 */
+  --accent-2: oklch(0.36 0.11 82); /* hijau botol, strip header — vs surface 6.03:1 */
+  --pop: oklch(0.54 0.21 300); /* ungu stempel, pakai <5% area — vs surface 3.10:1 */
+
+  /* tekstur serat kertas (placeholder agen A, dipertahankan) */
+  --kertas-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+
+  /* garis tegas spreadsheet */
+  --line: 2px solid var(--text);
+  --line-thin: 1px solid var(--text);
+  --line-dashed: 2px dashed var(--text);
+
+  /* --- font ---
+     --font-display / --font-body / --font-aksen: didefinisikan Astro Fonts API
+     di astro.config.ts (agen A) — JANGAN didefinisikan ulang di sini.
+     Alias --font-accent menunjuk --font-aksen agar konsisten dgn penamaan token. */
+  --font-accent: var(--font-aksen);
+
+  /* --- gerak (micro-interactions): durasi + easing baku --- */
+  --dur-instant: 80ms;
+  --dur-fast: 150ms;
+  --dur-normal: 250ms;
+  --dur-slow: 400ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* --- target sentuh & marquee --- */
+  --tap-min: 44px;
+  --skew: -8deg; /* kemiringan default band marquee diagonal */
+
+  /* --- stempel (dioverride inline per baris via JS: rotate acak ±3deg) --- */
+  --stempel-rot: 3deg;
+}
+
+/* Utilitas font dari Astro Fonts API: Astro hanya menyetel variabel
+   --font-display / --font-body / --font-aksen di :root; utilitas Tailwind
+   harus didefinisikan eksplisit di sini agar class font-display & font-aksen
+   benar-benar jalan (bukan fallback font default diam-diam). */
+@utility font-display {
+  font-family: var(--font-display);
+}
+@utility font-body {
+  font-family: var(--font-body);
+}
+@utility font-aksen {
+  font-family: var(--font-aksen);
+}
+
+/* Utilitas Tailwind v4 dari token (dipakai di DOM):
+   bg-kertas, bg-kertas2, text-tinta, text-tinta2, text-lumut, bg-botol,
+   text-stempel, font-accent. */
+@theme {
+  --color-kertas: var(--bg);
+  --color-kertas2: var(--surface);
+  --color-tinta: var(--text);
+  --color-tinta2: var(--muted);
+  --color-lumut: var(--accent);
+  --color-botol: var(--accent-2);
+  --color-stempel: var(--pop);
+
+  --font-accent: var(--font-aksen);
+}
+
+/* Fokus keyboard selalu kelihatan (gaya papan: garis putus-putus tebal) */
+:focus-visible {
+  outline: 3px dashed var(--accent-2);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-instant: 1ms;
+    --dur-fast: 1ms;
+    --dur-normal: 1ms;
+    --dur-slow: 1ms;
+  }
+}

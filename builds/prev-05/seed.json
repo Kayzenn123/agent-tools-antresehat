@@ -1,0 +1,17 @@
+{
+  "layout": "terminal interaktif",
+  "fonts": {
+    "display": "Sofia"
+  },
+  "palette": {
+    "mode": "mid",
+    "harmony": "analogous"
+  },
+  "motion": {
+    "camera": "zoom-via-scroll"
+  },
+  "domain": "stopwatch lomba 17-an",
+  "icons": {
+    "style": "solid blocky custom SVG"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "layout": "scene zoom-through berantai: 1 kaset raksasa dimasuki",
+  "fonts": {
+    "display": "Angkor"
+  },
+  "palette": {
+    "mode": "dark",
+    "harmony": "triadic"
+  },
+  "motion": {
+    "camera": "kamera terbang scroll+rotate"
+  },
+  "domain": "warung tegal",
+  "icons": {
+    "style": "duotone Tabler + 3 custom (kaset, spul, bungkus)"
+  }
+}

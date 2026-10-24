@@ -1,0 +1,17 @@
+{
+  "layout": "timeline satu sumbu: karcis paling mepet nempel paling atas, tanpa hero tanpa navbar",
+  "fonts": {
+    "display": "Noto Serif Grantha"
+  },
+  "palette": {
+    "mode": "mid",
+    "harmony": "complementary"
+  },
+  "motion": {
+    "camera": "pinned pan 3 panel+zoom 1.6×"
+  },
+  "domain": "DeadlineRadar",
+  "icons": {
+    "style": "pixel-art custom (radar sapu, karcis berlubang, stempel) + Bootstrap Icons"
+  }
+}

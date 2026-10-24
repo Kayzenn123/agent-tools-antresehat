@@ -1,0 +1,17 @@
+{
+  "layout": "papan pengumuman penuh stiker",
+  "fonts": {
+    "display": "Eagle Lake"
+  },
+  "palette": {
+    "mode": "light",
+    "harmony": "split-complementary"
+  },
+  "motion": {
+    "camera": "canvas drag+zoom scroll"
+  },
+  "domain": "pasar loak",
+  "icons": {
+    "style": "outline tipis 1px Phosphor + custom"
+  }
+}

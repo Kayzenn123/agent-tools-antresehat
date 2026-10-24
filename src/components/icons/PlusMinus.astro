@@ -1,0 +1,27 @@
+---
+/**
+ * PlusMinus — tambah/kurang dalam satu berkas (prop `varian`).
+ * Gaya: garis putus-putus 2px, sudut tajam.
+ */
+interface Props {
+  class?: string;
+  varian?: 'plus' | 'minus';
+}
+const { class: cls = '', varian = 'plus' } = Astro.props;
+---
+<svg
+  class={cls}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-dasharray="3.5 2.5"
+  stroke-linecap="square"
+  stroke-linejoin="miter"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d="M4 4h16v16H4z" />
+  <path d="M8 12h8" />
+  {varian === 'plus' && <path d="M12 8v8" />}
+</svg>

@@ -1,0 +1,197 @@
+---
+/**
+ * AntreSehat — SATU halaman: papan antrean digital puskesmas.
+ * Struktur: header papan RT, nomor raksasa, 2 marquee diagonal,
+ * tab sheet (Ambil | Papan | Loket), lalu Steps + FAQs pendukung.
+ * Fungsi diisi JS (scripts/queue), gerak & suara (scripts/motion).
+ */
+import Layout from '~/layouts/Layout.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import SheetTabs from '~/components/queue/SheetTabs.astro';
+import Karcis from '~/components/queue/Karcis.astro';
+import NakesPanel from '~/components/queue/NakesPanel.astro';
+import GrainKertas from '~/components/decor/GrainKertas.astro';
+import GelombangPasang from '~/components/decor/GelombangPasang.astro';
+import StempelCap from '~/components/icons/StempelCap.astro';
+import { LOKET, NAMA_PUSKESMAS, JAM_OPERASIONAL, MARQUEE, LANGKAH, FAQ, LABEL_CONTOH } from '~/data/loket';
+
+const metadata = {
+  title: 'AntreSehat — Papan Antrean Digital Puskesmas',
+  ignoreTitleTemplate: true,
+  description: 'Papan antrean digital puskesmas — ambil nomor dari HP, pantau papan dari rumah.',
+  canonical: 'https://kayzenn123.github.io/agent-tools-antresehat/',
+  openGraph: {
+    url: 'https://kayzenn123.github.io/agent-tools-antresehat/',
+    siteName: 'AntreSehat',
+    type: 'website',
+    locale: 'id_ID',
+    images: [{ url: '~/assets/images/default.png', width: 1200, height: 628 }],
+  },
+  twitter: {
+    handle: '@antreshat',
+    cardType: 'summary_large_image',
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <GrainKertas />
+
+  <a
+    href="#sheet-ambil"
+    class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[60] focus:p-3 focus:font-bold"
+    style="background: var(--pop); color: var(--bg)"
+  >
+    Lompat ke konten
+  </a>
+
+  <!-- Strip papan RT -->
+  <header id="papan-header" class="border-b-2 border-dashed" style="border-color: var(--text); background: var(--accent-2)">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-3" style="color: var(--bg)">
+      <div>
+        <p class="font-display text-sm uppercase tracking-[0.3em] opacity-90">{NAMA_PUSKESMAS}</p>
+        <h1 class="font-display text-2xl font-bold uppercase tracking-wide md:text-3xl">Papan Antrean Puskesmas</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <button
+          type="button"
+          data-easter
+          aria-label="Stempel papan — ketuk lima kali untuk kejutan"
+          class="stempel-mini flex items-center gap-1 border-2 border-dashed px-2 py-1 text-xs font-bold uppercase tracking-widest"
+          style="border-color: var(--bg); color: var(--bg); --stempel-rot: -3deg"
+        >
+          <StempelCap />
+          <span>{LABEL_CONTOH}</span>
+        </button>
+        <p class="text-right text-sm">{JAM_OPERASIONAL}</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Nomor raksasa: nomor yang sedang dipanggil (diisi JS, flip 3D per digit) -->
+  <div class="border-b-2 border-dashed px-4 py-8 text-center" style="border-color: var(--text)">
+    <p class="font-display text-sm uppercase tracking-[0.3em]" style="color: var(--muted)">Sedang dipanggil</p>
+    <div id="nomor-raksasa" aria-live="polite" class="nomor-raksasa mt-2" style="color: var(--text)">
+      —
+    </div>
+    <p id="nomor-raksasa-sub" class="mt-2 text-base" style="color: var(--muted)">
+      Sepi, belum ada yang antre. Enak, langsung dilayani. (contoh)
+    </p>
+  </div>
+
+  <!-- 2 band marquee diagonal, arah berlawanan -->
+  <div class="relative overflow-hidden py-6" aria-label="Pengumuman">
+    <div class="marquee-band marquee-band--a" data-marquee="1">
+      <div class="marquee-track" aria-hidden="true">
+        {MARQUEE.concat(MARQUEE).map((teks) => <span class="marquee-item">/// {teks}</span>)}
+      </div>
+    </div>
+    <div class="marquee-band marquee-band--b" data-marquee="2">
+      <div class="marquee-track" aria-hidden="true">
+        {MARQUEE.concat(MARQUEE).reverse().map((teks) => <span class="marquee-item">/// {teks}</span>)}
+      </div>
+    </div>
+    <button type="button" data-marquee-pause aria-pressed="false" aria-label="Jeda pengumuman" class="text-sm font-bold">
+      Jeda pengumuman
+    </button>
+  </div>
+
+  <main id="sheets" class="mx-auto max-w-6xl px-4 pb-8">
+    <!-- SHEET AMBIL -->
+    <section id="sheet-ambil" role="tabpanel" aria-labelledby="tab-ambil" hidden>
+      <h2 class="font-display mt-6 text-2xl font-bold uppercase tracking-wide">Ambil nomor</h2>
+      <p class="mt-1" style="color: var(--muted)">Nggak perlu datang subuh, Bu… ambil dari HP, pantau dari rumah. (contoh)</p>
+
+      <form id="form-ambil" class="mt-4 border-2 border-dashed p-4" style="border-color: var(--text)">
+        <div>
+          <label for="pilih-loket" class="font-display block text-sm font-bold uppercase tracking-widest">Loket tujuan</label>
+          <select id="pilih-loket" name="loket" required class="mt-1 w-full border-2 p-3 text-base" style="border-color: var(--text); background: var(--surface)">
+            {LOKET.map((l) => (
+              <option value={l.id}>{l.id} — {l.nama} (nomor {l.kode})</option>
+            ))}
+          </select>
+        </div>
+        <div class="mt-3">
+          <label for="nama-pasien" class="font-display block text-sm font-bold uppercase tracking-widest">Nama <span class="font-normal normal-case tracking-normal" style="color: var(--muted)">(boleh kosong)</span></label>
+          <input id="nama-pasien" name="nama" type="text" maxlength="40" autocomplete="name" placeholder="cth: Bu Siti" class="mt-1 w-full border-2 p-3 text-base" style="border-color: var(--text); background: var(--surface)" />
+        </div>
+        <button id="btn-ambil" type="submit" class="font-display mt-4 w-full p-4 text-xl font-bold uppercase tracking-widest" style="background: var(--accent-2); color: var(--bg)">
+          Ambil nomor
+        </button>
+        <p id="form-pesan" class="mt-2 min-h-[1.5em]" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="mt-4">
+        <Karcis />
+      </div>
+      <p id="estimasi" class="mt-3 text-base" style="color: var(--muted)">
+        Perkiraan tunggu: — (contoh: posisi antrean × 4 menit)
+      </p>
+    </section>
+
+    <!-- SHEET PAPAN -->
+    <section id="sheet-papan" role="tabpanel" aria-labelledby="tab-papan">
+      <h2 class="font-display mt-6 text-2xl font-bold uppercase tracking-wide">Papan antrean</h2>
+      <p class="mt-2" style="color: var(--muted)">Nomor yang dipanggil naik seperti air pasang, Bu… (contoh)</p>
+
+      <div class="mt-4 flex flex-wrap gap-2" role="group" aria-label="Saring per loket">
+        {(['semua', 'L1', 'L2', 'L3'] as const).map((k) => (
+          <button
+            type="button"
+            data-filter-loket={k}
+            aria-pressed={k === 'semua' ? 'true' : 'false'}
+            class="font-display border-2 px-4 py-2 text-sm font-bold uppercase tracking-widest"
+            style="border-color: var(--text)"
+          >
+            {k === 'semua' ? 'Semua' : `Loket ${k}`}
+          </button>
+        ))}
+      </div>
+
+      <div id="papan-grid" class="mt-3 border-2 border-dashed" style="border-color: var(--text)" aria-live="polite">
+        <p class="papan-kosong p-4">Sebentar, papan disiapin…</p>
+      </div>
+
+      <GelombangPasang />
+    </section>
+
+    <!-- SHEET LOKET -->
+    <section id="sheet-loket" role="tabpanel" aria-labelledby="tab-loket" hidden>
+      <h2 class="font-display mt-6 text-2xl font-bold uppercase tracking-wide">Loket nakes</h2>
+      <p class="mt-2" style="color: var(--muted)">Dashboard petugas — satu ketuk, satu panggilan. (contoh)</p>
+      <div class="mt-4">
+        <NakesPanel />
+      </div>
+    </section>
+
+    <!-- Tab sheet: navigasi utama (sticky bawah) -->
+    <SheetTabs />
+  </main>
+
+  <Steps
+    title="Cara pakainya"
+    subtitle="Empat langkah dari rumah sampai loket — tanpa antre subuh."
+    items={LANGKAH.map((s) => ({ title: s.title, description: s.description }))}
+    classes={{ container: 'max-w-6xl mx-auto px-4' }}
+  />
+
+  <FAQs
+    title="Tanya Bu RT"
+    subtitle="Yang sering ditanyain soal papan antrean."
+    items={FAQ.map((f) => ({ title: f.title, description: f.description }))}
+    classes={{ container: 'max-w-6xl mx-auto px-4' }}
+  />
+
+  <footer class="mt-8 border-t-2 border-dashed px-4 py-6" style="border-color: var(--text)">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2">
+      <p class="font-display text-sm uppercase tracking-widest" style="color: var(--muted)">
+        AntreSehat — papan pengumuman RT-nya puskesmas (contoh)
+      </p>
+      <p class="text-sm" style="color: var(--muted)">Data tersimpan di browser sendiri. Nggak dikirim ke mana-mana.</p>
+    </div>
+  </footer>
+
+  <script src="../scripts/queue/main.js"></script>
+  <script src="../scripts/motion/index.js"></script>
+</Layout>

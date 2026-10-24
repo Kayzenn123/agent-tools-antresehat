@@ -1,0 +1,23 @@
+---
+/** PanahFlick — panah lempar ke kanan + garis gerak. Gaya garis putus-putus 2px, sudut tajam. */
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+<svg
+  class={cls}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-dasharray="3.5 2.5"
+  stroke-linecap="square"
+  stroke-linejoin="miter"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d="M3 12h11" />
+  <path d="M11 6l6 6-6 6" />
+  <path d="M3 7h4M3 17h4" stroke-dasharray="2 2" />
+</svg>

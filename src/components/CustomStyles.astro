@@ -1,0 +1,125 @@
+---
+// CustomStyles: token desain AntreSehat (papan pengumuman RT / pasang surut).
+// Font di-register via Astro Fonts API (astro.config.ts) dengan cssVariable:
+// --font-display (Atkinson Hyperlegible Mono), --font-body (Sofia Sans Extra
+// Condensed), --font-aksen (Bungee Hairline).
+// Warna diambil dari src/assets/styles/tokens.css (nilai final BRIEF; agen C
+// menyelaraskan + verifikasi kontras AA). Constraint seed: tanpa border-radius
+// di mana pun, tanpa kecuali.
+---
+
+<style is:inline>
+  :root {
+    --aw-font-sans: var(--font-body);
+    --aw-font-serif: var(--font-display);
+    --aw-font-heading: var(--font-display);
+    --aw-font-aksen: var(--font-aksen);
+
+    --aw-color-primary: var(--accent);
+    --aw-color-secondary: var(--accent-2);
+    --aw-color-accent: var(--pop);
+
+    --aw-color-text-heading: var(--text);
+    --aw-color-text-default: var(--text);
+    --aw-color-text-muted: var(--muted);
+    --aw-color-bg-page: var(--bg);
+    --aw-color-surface: var(--surface);
+
+    ::selection {
+      background-color: var(--pop);
+      color: var(--bg);
+    }
+  }
+
+  .dark {
+    --aw-font-sans: var(--font-body);
+    --aw-font-serif: var(--font-display);
+    --aw-font-heading: var(--font-display);
+    --aw-font-aksen: var(--font-aksen);
+
+    --aw-color-primary: var(--accent);
+    --aw-color-secondary: var(--accent-2);
+    --aw-color-accent: var(--pop);
+
+    --aw-color-text-heading: oklch(0.88 0.04 82);
+    --aw-color-text-default: oklch(0.82 0.04 82);
+    --aw-color-text-muted: oklch(0.62 0.04 82);
+    --aw-color-bg-page: oklch(0.24 0.03 82);
+    --aw-color-surface: oklch(0.3 0.035 82);
+
+    ::selection {
+      background-color: var(--pop);
+      color: var(--bg);
+    }
+  }
+
+  /* Constraint seed "tanpa border-radius": radius 0 di semua elemen. */
+  *,
+  *::before,
+  *::after {
+    border-radius: 0 !important;
+  }
+
+  body {
+    font-family: var(--aw-font-sans);
+    font-size: 1.125rem;
+    line-height: 1.45;
+  }
+
+  /* Kertas bertekstur: grain feTurbulence di seluruh latar papan. */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    background-image: var(--kertas-grain);
+    opacity: 0.5;
+  }
+
+  /* Aksesibilitas: semua input ≥16px agar tidak zoom di iOS. */
+  input,
+  select,
+  textarea,
+  button {
+    font-size: 1rem;
+    font-family: var(--aw-font-sans);
+  }
+
+  :focus-visible {
+    outline: 3px dashed var(--pop);
+    outline-offset: 2px;
+  }
+
+  .font-aksen {
+    font-family: var(--aw-font-aksen);
+  }
+
+  .font-display {
+    font-family: var(--aw-font-heading);
+  }
+
+  /* Marquee: band pengumuman diagonal, track diisi dari data loket. */
+  .marquee {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee .marquee-track {
+    display: inline-flex;
+    gap: 0;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    body::before {
+      display: none;
+    }
+  }
+</style>

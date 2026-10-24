@@ -1,0 +1,34 @@
+---
+/**
+ * SheetTabs — tab sheet spreadsheet (AMBIL | PAPAN | LOKET).
+ * Navigasi utama AntreSehat: tanpa navbar klasik.
+ * JS (agent B) mengatur aria-selected + tampil/sembunyi sheet.
+ */
+const tabs = [
+  { id: 'ambil', label: 'Ambil', hint: 'Ambil nomor antrean' },
+  { id: 'papan', label: 'Papan', hint: 'Pantau papan antrean' },
+  { id: 'loket', label: 'Loket', hint: 'Dashboard nakes' },
+];
+---
+
+<nav id="sheet-tabs" role="tablist" aria-label="Tab sheet antrean" class="sticky bottom-0 z-40">
+  <div class="grid grid-cols-3 border-t-2 border-dashed" style="border-color: var(--text)">
+    {
+      tabs.map((tab, i) => (
+        <button
+          type="button"
+          role="tab"
+          data-sheet={tab.id}
+          aria-selected={tab.id === 'papan' ? 'true' : 'false'}
+          aria-controls={`sheet-${tab.id}`}
+          id={`tab-${tab.id}`}
+          tabindex={tab.id === 'papan' ? 0 : -1}
+          class="font-display py-4 text-center text-lg font-bold uppercase tracking-widest"
+          title={tab.hint}
+        >
+          {tab.label}
+        </button>
+      ))
+    }
+  </div>
+</nav>

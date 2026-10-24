@@ -1,0 +1,17 @@
+{
+  "layout": "satu halaman: SIDE A racik / SIDE B syarat+ekspor ala sampul kaset",
+  "fonts": {
+    "display": "Noto Serif Grantha"
+  },
+  "palette": {
+    "mode": "mid",
+    "harmony": "complementary"
+  },
+  "motion": {
+    "camera": "hero pinned+zoom 2.6×"
+  },
+  "domain": "infografis-cepat",
+  "icons": {
+    "style": "pixel-art custom (piring, kaset, stempel, sendok) + Bootstrap Icons"
+  }
+}

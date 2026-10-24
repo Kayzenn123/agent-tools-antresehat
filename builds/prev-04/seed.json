@@ -1,0 +1,17 @@
+{
+  "layout": "canvas pan/zoom dengan titik konten",
+  "fonts": {
+    "display": "Kaisei Tokumin"
+  },
+  "palette": {
+    "mode": "mid",
+    "harmony": "monochrome"
+  },
+  "motion": {
+    "camera": "canvas drag+zoom"
+  },
+  "domain": "kamus bahasa daerah",
+  "icons": {
+    "style": "duotone custom pixel-art"
+  }
+}

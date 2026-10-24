@@ -1,0 +1,17 @@
+{
+  "layout": "poster tipografi raksasa",
+  "fonts": {
+    "display": "Gruppo"
+  },
+  "palette": {
+    "mode": "dark",
+    "harmony": "tetradic"
+  },
+  "motion": {
+    "camera": "kamera terbang scroll"
+  },
+  "domain": "katalog tanaman",
+  "icons": {
+    "style": "pixel-art custom SVG"
+  }
+}

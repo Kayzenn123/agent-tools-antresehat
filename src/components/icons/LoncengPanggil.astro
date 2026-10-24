@@ -1,0 +1,25 @@
+---
+/** LoncengPanggil — bel meja loket. Gaya garis putus-putus 2px, sudut tajam. */
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+<svg
+  class={cls}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-dasharray="3.5 2.5"
+  stroke-linecap="square"
+  stroke-linejoin="miter"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d="M4 15a8 7 0 0 1 16 0" />
+  <path d="M2 19h20" />
+  <path d="M12 8V6" />
+  <path d="M10 6h4" />
+  <path d="M6 15h12" stroke-dasharray="2 2" />
+</svg>

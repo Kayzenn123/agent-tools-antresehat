@@ -1,0 +1,26 @@
+---
+/**
+ * KarcisNomor — CUSTOM domain: karcis antrean bernomor dengan garis sobek.
+ * Gaya: garis putus-putus 2px, sudut tajam.
+ */
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+<svg
+  class={cls}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-dasharray="3.5 2.5"
+  stroke-linecap="square"
+  stroke-linejoin="miter"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d="M3 7h18v2.5a2.5 2.5 0 0 0 0 5V17H3v-2.5a2.5 2.5 0 0 0 0-5V7z" />
+  <path d="M15 7v10" stroke-dasharray="2 2" />
+  <path d="M6.5 10.5h5M6.5 13.5h5" stroke-dasharray="2 2" />
+</svg>

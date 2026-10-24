@@ -1,0 +1,38 @@
+{
+  "seed": "2026-10-31",
+  "totalFontsInPool": 1958,
+  "domain": "warung tegal",
+  "layout": "koran multi-kolom",
+  "reference": "kartu remi",
+  "constraint": "tanpa gambar, murni tipografi dan bentuk",
+  "motion": {
+    "camera": "parallax 5 layer + zoom out di akhir",
+    "marquee": "marquee vertikal di sisi layar",
+    "text": "variable font axis animasi",
+    "input": "tilt 3D pointer/gyro",
+    "reveal": "garis draw-on lalu isi"
+  },
+  "icons": {
+    "style": "garis putus-putus",
+    "source": "Lucide"
+  },
+  "fonts": {
+    "display": "Roboto Slab",
+    "body": "Ojuju",
+    "accent": "Henny Penny"
+  },
+  "palette": {
+    "mode": "dark",
+    "harmony": "split-complementary",
+    "baseHue": 43,
+    "bg": "oklch(0.16 0.051 43)",
+    "surface": "oklch(0.21 0.040 43)",
+    "text": "oklch(0.94 0.020 43)",
+    "muted": "oklch(0.65 0.030 43)",
+    "accent": "oklch(0.74 0.161 193)",
+    "accent2": "oklch(0.69 0.230 253)",
+    "pop": "oklch(0.82 0.249 186)",
+    "note": "Draf. Wajib cek kontras AA dan rapikan lightness/chroma."
+  },
+  "buildDate": "2026-10-20"
+}

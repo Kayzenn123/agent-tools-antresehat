@@ -1,0 +1,27 @@
+---
+/**
+ * GelombangPasang — CUSTOM domain: tiga garis gelombang yang meninggi
+ * (antrean naik seperti air pasang).
+ * Gaya: garis putus-putus 2px, sudut tajam.
+ */
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+<svg
+  class={cls}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-dasharray="3.5 2.5"
+  stroke-linecap="square"
+  stroke-linejoin="miter"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d="M2 19q3-3 5.5 0t5.5 0 5.5 0 3.5-1" />
+  <path d="M2 14q3-3 5.5 0t5.5 0 5.5 0" />
+  <path d="M2 9q3-3 5.5 0t5.5 0" />
+</svg>

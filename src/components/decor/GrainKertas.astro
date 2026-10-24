@@ -1,0 +1,16 @@
+---
+/**
+ * GrainKertas — overlay serat kertas feTurbulence di seluruh layar.
+ * Opacity rendah, pointer-events none, di atas konten tapi di bawah wipe.
+ */
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+<div
+  class:list={['grain-kertas', cls]}
+  aria-hidden="true"
+  style="position: fixed; inset: 0; z-index: 70; pointer-events: none; opacity: 0.35; background-image: var(--kertas-grain); background-size: 140px 140px; mix-blend-mode: multiply;"
+>
+</div>

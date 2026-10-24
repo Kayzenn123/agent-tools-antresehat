@@ -1,0 +1,22 @@
+---
+/**
+ * Stempel — cap ungu "DIPANGGIL" (atau teks lain) dengan rotasi acak ±3deg.
+ * Prop `putar`: derajat rotasi; kalau kosong, diacak saat render (SSR).
+ * Mask noise + border tebal dari class .stempel-dipanggil (queue.css).
+ */
+interface Props {
+  class?: string;
+  teks?: string;
+  putar?: number;
+}
+const { class: cls = '', teks = 'Dipanggil', putar } = Astro.props;
+// acak ±3deg sekali saat render server
+const rot = putar ?? Math.round((Math.random() * 6 - 3) * 10) / 10;
+---
+<span
+  class:list={['stempel-dipanggil', cls]}
+  style={`--stempel-rot: ${rot}deg;`}
+  aria-hidden="true"
+>
+  {teks}
+</span>

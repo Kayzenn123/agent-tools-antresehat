@@ -1,0 +1,562 @@
+/* ==========================================================================
+   queue.css — gaya spreadsheet ANTRESEHAT (agen C)
+   Grid garis tegas, sel diketuk, stempel ungu, karcis sobek, tab sheet,
+   marquee diagonal, gelombang. Semua di @layer agar rapi.
+   CONSTRAINT KERAS: border-radius 0 di semua elemen (reset di bawah).
+   ========================================================================== */
+
+@layer queue-reset, queue-base, queue-sheet, queue-baris, queue-karcis, queue-tabs,
+  queue-marquee, queue-gelombang, queue-motion;
+
+/* --- CONSTRAINT KERAS: tanpa sudut membulat, tanpa kecuali --- */
+@layer queue-reset {
+  *,
+  *::before,
+  *::after {
+    border-radius: 0 !important;
+  }
+}
+
+/* --- dasar kertas --- */
+@layer queue-base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    background-image: var(--kertas-grain);
+    color: var(--text);
+    font-family: var(--font-body);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* area penuh pakai dvh (bukan vh) */
+  .layar-penuh {
+    min-height: 100dvh;
+    min-height: 100svh;
+  }
+
+  /* target sentuh >= 44px */
+  button,
+  [role='button'],
+  [role='tab'],
+  input,
+  select,
+  .baris,
+  .sheet-tab {
+    min-height: var(--tap-min);
+  }
+
+  ::selection {
+    background: var(--accent-2);
+    color: var(--surface);
+  }
+}
+
+/* --- spreadsheet: grid garis tegas + header kolom loket --- */
+@layer queue-sheet {
+  .sheet {
+    border: var(--line);
+    background: var(--bg);
+  }
+
+  .sheet-kepala {
+    display: grid;
+    background: var(--accent-2);
+    color: var(--surface);
+    border-bottom: var(--line);
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .sheet-kepala > * {
+    padding: 0.65rem 0.75rem;
+    min-height: var(--tap-min);
+    display: flex;
+    align-items: center;
+  }
+
+  .sheet-kepala > * + * {
+    border-left: 2px solid var(--surface);
+  }
+
+  /* header kolom bisa diketuk (filter loket) */
+  .sheet-kepala [data-filter-loket] {
+    cursor: pointer;
+    text-decoration: underline dashed;
+    text-underline-offset: 4px;
+  }
+
+  .sheet-kepala [data-filter-loket]:active {
+    background: color-mix(in oklch, var(--surface) 18%, var(--accent-2));
+  }
+
+  #papan-grid {
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent calc(4.5rem - 1px),
+        color-mix(in oklch, var(--text) 22%, transparent) calc(4.5rem - 1px),
+        color-mix(in oklch, var(--text) 22%, transparent) 4.5rem
+      ),
+      var(--bg);
+  }
+
+  .papan-kosong {
+    padding: 2.5rem 1.25rem;
+    text-align: center;
+    color: var(--muted);
+    border: var(--line-dashed);
+    margin: 1rem;
+  }
+}
+
+/* --- baris status + stempel --- */
+@layer queue-baris {
+  .baris {
+    border-bottom: var(--line-thin);
+    background: var(--bg);
+    cursor: pointer;
+    position: relative;
+    touch-action: pan-y; /* flick horizontal JS, scroll vertikal tetap jalan */
+    user-select: none;
+    /* sel spreadsheet: nomor | nama+loket | status+jam */
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      'nomor nama status'
+      'nomor loket jam';
+    gap: 0.1rem 0.8rem;
+    align-items: center;
+    padding: 0.7rem 0.9rem;
+    min-height: 44px;
+  }
+
+  .baris .sel-nomor {
+    grid-area: nomor;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.35rem;
+    min-width: 4.2rem;
+  }
+
+  .baris .sel-nama {
+    grid-area: nama;
+    font-size: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .baris .sel-loket {
+    grid-area: loket;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .baris .sel-status {
+    grid-area: status;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: right;
+  }
+
+  .baris .sel-waktu {
+    grid-area: jam;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .baris:active {
+    background: var(--surface);
+  }
+
+  .baris[data-status='dipanggil'] {
+    background: var(--surface);
+    border-bottom: var(--line);
+  }
+
+  .baris[data-status='dipanggil'] .sel-nomor {
+    color: var(--accent-2);
+  }
+
+  .baris[data-status='dipanggil'] .sel-status {
+    color: var(--pop);
+  }
+
+  .baris[data-status='selesai'] {
+    color: var(--muted);
+  }
+
+  .baris[data-status='selesai'] .sel-nomor {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+  }
+
+  .baris[data-status='lewat'] {
+    color: var(--muted);
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0 10px,
+      color-mix(in oklch, var(--muted) 14%, transparent) 10px 11px
+    );
+  }
+
+  /* stempel DIPANGGIL: cap ungu, rotate acak ±3deg (diisi JS via --stempel-rot) */
+  .stempel-dipanggil,
+  .baris .stempel {
+    display: inline-block;
+    border: 3px solid var(--pop);
+    color: var(--pop);
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    padding: 0.3rem 0.7rem 0.3rem 0.9rem;
+    transform: rotate(var(--stempel-rot, 3deg));
+    /* tekstur tinta tidak rata: mask noise via SVG */
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='60'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0.1'/%3E%3C/filter%3E%3Crect width='140' height='60' filter='url(%23t)'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='60'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0.1'/%3E%3C/filter%3E%3Crect width='140' height='60' filter='url(%23t)'/%3E%3C/svg%3E");
+    -webkit-mask-size: cover;
+    mask-size: cover;
+  }
+
+  .baris .stempel {
+    font-size: 0.8rem;
+  }
+
+  .baris[data-status='dipanggil'] .stempel {
+    display: inline-block;
+  }
+}
+
+/* --- karcis bernomor + garis sobek --- */
+@layer queue-karcis {
+  .karcis-strip {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    touch-action: pan-y; /* flick horizontal JS */
+  }
+
+  .karcis {
+    border: var(--line);
+    background: var(--surface);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    min-width: 17rem;
+    position: relative;
+  }
+
+  .karcis-nomor {
+    font-family: var(--font-accent);
+    font-size: clamp(2.5rem, 12vw, 4rem);
+    line-height: 1;
+    padding: 1rem;
+    color: var(--text);
+  }
+
+  .karcis-meta {
+    padding: 1rem;
+    border-left: var(--line-dashed);
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25rem;
+    min-width: 8rem;
+  }
+
+  /* garis sobek: dashed + lubang di kedua ujung */
+  .divider-sobek {
+    border: 0;
+    border-top: var(--line-dashed);
+    margin: 1.5rem 0;
+    position: relative;
+  }
+
+  .divider-sobek::before,
+  .divider-sobek::after {
+    content: '';
+    position: absolute;
+    top: -7px;
+    width: 12px;
+    height: 12px;
+    background: var(--bg);
+    border: var(--line-thin);
+  }
+
+  .divider-sobek::before {
+    left: -6px;
+  }
+
+  .divider-sobek::after {
+    right: -6px;
+  }
+}
+
+/* --- tab sheet ala spreadsheet --- */
+@layer queue-tabs {
+  .sheet-tabs {
+    display: flex;
+    border-top: var(--line);
+    background: var(--bg);
+    position: sticky;
+    bottom: 0;
+    z-index: 30;
+  }
+
+  .sheet-tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 0.6rem 0.25rem;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    border-right: var(--line-thin);
+    cursor: pointer;
+    background: transparent;
+  }
+
+  .sheet-tab:last-child {
+    border-right: 0;
+  }
+
+  .sheet-tab[aria-selected='true'] {
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: inset 0 4px 0 var(--accent-2);
+    font-weight: 700;
+  }
+
+  .sheet-tab:active {
+    background: var(--surface);
+  }
+}
+
+/* --- marquee diagonal: 2 band, skew via --skew --- */
+@layer queue-marquee {
+  .marquee {
+    overflow: clip;
+    padding-block: 1.25rem;
+    position: relative;
+  }
+
+  .marquee-band {
+    width: 112vw;
+    margin-left: -6vw;
+    transform: rotate(var(--skew, -8deg));
+    border-top: var(--line);
+    border-bottom: var(--line);
+    overflow: clip;
+    will-change: transform;
+  }
+
+  .marquee-band--a {
+    background: var(--accent-2);
+    color: var(--surface);
+  }
+
+  .marquee-band--b {
+    background: var(--text);
+    color: var(--bg);
+    margin-top: -2px;
+  }
+
+  .marquee-band--b .marquee-track {
+    animation-direction: reverse;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-jalan 28s linear infinite;
+    will-change: transform;
+  }
+
+  .marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 1.25rem;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+  }
+
+  .marquee-item + .marquee-item {
+    border-left: 2px dashed currentColor;
+  }
+
+  @keyframes marquee-jalan {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* tombol jeda (WCAG 2.2.2) */
+  .marquee-jeda .marquee-track,
+  .gerak-mati .marquee-track {
+    animation-play-state: paused;
+  }
+
+  [data-marquee-pause] {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.25rem;
+    z-index: 2;
+    border: var(--line-thin);
+    background: var(--bg);
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.4rem 0.7rem;
+    min-height: 44px;
+    cursor: pointer;
+  }
+
+  /* stempel kecil header (juga target easter egg): tap target aman */
+  .stempel-mini {
+    min-height: 44px;
+    transform: rotate(var(--stempel-rot, -3deg));
+  }
+}
+
+/* --- gelombang pasang (data-driven, tinggi via --gelombang-tinggi) --- */
+@layer queue-gelombang {
+  #gelombang {
+    position: relative;
+    width: 100%;
+    height: var(--gelombang-tinggi, 72px);
+    min-height: 40px;
+    max-height: 40dvh;
+    overflow: clip;
+    transition: height 600ms var(--ease-out-expo);
+  }
+
+  #gelombang svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  #gelombang path {
+    fill: var(--accent-2);
+    opacity: 0.9;
+  }
+}
+
+/* --- nomor raksasa: 1 digit = 1 kartu flip 3D --- */
+@layer queue-motion {
+  .nomor-raksasa {
+    font-family: var(--font-accent);
+    font-size: clamp(4.5rem, 22vw, 11rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    perspective: 700px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+    color: var(--text);
+  }
+
+  .nomor-raksasa .raksasa-nomor {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+  }
+
+  /* label loket di bawah angka: teks biasa, bukan digit raksasa */
+  .nomor-raksasa .raksasa-loket {
+    display: block;
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 4.5vw, 1.5rem);
+    letter-spacing: 0;
+    line-height: 1.4;
+    color: var(--muted);
+    margin-top: 0.5rem;
+  }
+
+  .nomor-raksasa .raksasa-kosong {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 4.5vw, 1.25rem);
+    letter-spacing: 0;
+    color: var(--muted);
+  }
+
+  .nomor-raksasa .digit {
+    display: inline-block;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform;
+    min-width: 0.62em;
+    text-align: center;
+  }
+
+  .nomor-raksasa .digit-sep {
+    color: var(--muted);
+  }
+
+  /* overlay wipe gelombang untuk transisi antar sheet */
+  .wipe-gelombang {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    background: var(--bg);
+    background-image: var(--kertas-grain);
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  /* tombol toggle gerak */
+  #toggle-gerak {
+    border: var(--line);
+    background: var(--surface);
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.55rem 0.9rem;
+    cursor: pointer;
+  }
+
+  #toggle-gerak[aria-pressed='false'] {
+    background: transparent;
+    color: var(--muted);
+    border-style: dashed;
+  }
+}
+
+/* reduced motion: semua gerak CSS mati, layout statis tetap rapi */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

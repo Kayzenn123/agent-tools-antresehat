@@ -1,0 +1,22 @@
+---
+/**
+ * BarisAntrean — template satu baris spreadsheet papan antrean.
+ * JS (agent B) meng-klon <template id="tpl-baris"> untuk tiap nomor:
+ *   article.baris[data-loket][data-nomor][data-status]
+ * Status: menunggu | dipanggil | selesai | terlewat.
+ * Stempel "DIPANGGIL" ungu muncul saat status=dipanggil.
+ */
+---
+
+<template id="tpl-baris">
+  <article class="baris grid grid-cols-[3.5rem_1fr_auto] items-center gap-2 border-b border-dashed px-3 py-3" data-loket="" data-nomor="" data-status="menunggu">
+    <span class="font-display text-2xl font-bold" data-sel="nomor">A-000</span>
+    <span class="min-w-0">
+      <span class="block truncate font-bold" data-sel="nama">—</span>
+      <span class="block text-sm" data-sel="loket" style="color: var(--muted)">Loket —</span>
+    </span>
+    <span class="stempel font-display hidden px-2 py-1 text-sm font-bold uppercase tracking-widest" data-sel="stempel">
+      Dipanggil
+    </span>
+  </article>
+</template>

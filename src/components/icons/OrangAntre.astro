@@ -1,0 +1,24 @@
+---
+/** OrangAntre — dua sosok antre. Gaya garis putus-putus 2px, sudut tajam. */
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+<svg
+  class={cls}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-dasharray="3.5 2.5"
+  stroke-linecap="square"
+  stroke-linejoin="miter"
+  aria-hidden="true"
+  focusable="false"
+>
+  <circle cx="8" cy="6" r="2.5" />
+  <path d="M3 20v-3a5 5 0 0 1 10 0v3" />
+  <circle cx="17" cy="8" r="2" />
+  <path d="M14 20v-2.5a4 4 0 0 1 7-2.7" />
+</svg>

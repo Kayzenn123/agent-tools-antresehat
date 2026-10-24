@@ -1,0 +1,23 @@
+---
+/** JamDinding — gaya garis putus-putus 2px, sudut tajam. */
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+<svg
+  class={cls}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-dasharray="3.5 2.5"
+  stroke-linecap="square"
+  stroke-linejoin="miter"
+  aria-hidden="true"
+  focusable="false"
+>
+  <circle cx="12" cy="13" r="8" />
+  <path d="M12 13V8M12 13l4 2" />
+  <path d="M12 2v3M9 2h6" />
+</svg>

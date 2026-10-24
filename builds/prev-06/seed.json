@@ -1,0 +1,17 @@
+{
+  "layout": "horizontal scroll penuh",
+  "fonts": {
+    "display": "titillium web"
+  },
+  "palette": {
+    "mode": "dark",
+    "harmony": "monochrome"
+  },
+  "motion": {
+    "camera": "pan horizontal pinned+zoom"
+  },
+  "domain": "resep nenek",
+  "icons": {
+    "style": "glyph di kotak bergeser"
+  }
+}

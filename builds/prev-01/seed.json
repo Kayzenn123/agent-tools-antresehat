@@ -1,0 +1,17 @@
+{
+  "layout": "spreadsheet sebagai UI",
+  "fonts": {
+    "display": "IBM Plex Mono"
+  },
+  "palette": {
+    "mode": "light",
+    "harmony": "monochrome"
+  },
+  "motion": {
+    "camera": "zoom in+pan"
+  },
+  "domain": "struk belanja",
+  "icons": {
+    "style": "outline tipis 1px"
+  }
+}

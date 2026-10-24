@@ -1,0 +1,17 @@
+{
+  "layout": "koran multi-kolom + kartu remi",
+  "fonts": {
+    "display": "Roboto Slab"
+  },
+  "palette": {
+    "mode": "dark",
+    "harmony": "split-complementary"
+  },
+  "motion": {
+    "camera": "parallax 5 layer+zoom-out"
+  },
+  "domain": "warteg",
+  "icons": {
+    "style": "dashed 2px Lucide + 3 custom"
+  }
+}

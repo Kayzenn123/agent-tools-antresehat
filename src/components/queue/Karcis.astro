@@ -1,0 +1,19 @@
+---
+/**
+ * Karcis — strip "karcis saya": karcis antrean digital pasien.
+ * JS (agent B) mengisi isinya setelah pasien menekan "Ambil nomor";
+ * strip bisa di-flick horizontal (drag inertia, gerak D).
+ * Slot empty state persona Bu RT di bawah — diganti JS saat ada karcis.
+ */
+---
+
+<div id="karcis-saya" class="karcis-strip border-2 border-dashed p-4" style="border-color: var(--text)">
+  <p class="font-display text-sm uppercase tracking-widest" style="color: var(--muted)">
+    Karcis saya
+  </p>
+  <p id="karcis-kosong" class="mt-2">
+    Belum ada karcis, Bu… isi formulir di atas lalu ketuk
+    <strong>“Ambil nomor”</strong> — karcisnya nongol di sini.
+  </p>
+  <!-- diisi JS: <article class="karcis" data-nomor="…" data-loket="…">…</article> -->
+</div>

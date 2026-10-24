@@ -1,0 +1,17 @@
+{
+  "layout": "terminal interaktif: situs = 1 terminal CRT, navigasi = perintah diketik",
+  "fonts": {
+    "display": "Betania Patmos GDL"
+  },
+  "palette": {
+    "mode": "dark",
+    "harmony": "monochrome"
+  },
+  "motion": {
+    "camera": "pan kanan + zoom-through teks jadi pintu"
+  },
+  "domain": "kalender weton",
+  "icons": {
+    "style": "outline tebal 3px sudut tajam, custom SVG"
+  }
+}

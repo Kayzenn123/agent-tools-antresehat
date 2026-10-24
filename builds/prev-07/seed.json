@@ -1,0 +1,17 @@
+{
+  "layout": "kartu bertumpuk bisa diseret",
+  "fonts": {
+    "display": "Smooch Sans"
+  },
+  "palette": {
+    "mode": "dark",
+    "harmony": "complementary"
+  },
+  "motion": {
+    "camera": "terbang scroll"
+  },
+  "domain": "kalender weton",
+  "icons": {
+    "style": "hand-drawn goyang feTurbulence"
+  }
+}

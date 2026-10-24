@@ -1,0 +1,38 @@
+{
+  "seed": "2026-10-25",
+  "totalFontsInPool": 1958,
+  "domain": "pasang surut",
+  "layout": "spreadsheet sebagai UI",
+  "reference": "papan pengumuman RT",
+  "constraint": "tanpa border-radius",
+  "motion": {
+    "camera": "kamera \"terbang\" lewat scroll (scale+translate+rotate)",
+    "marquee": "marquee diagonal",
+    "text": "split huruf flip 3D",
+    "input": "drag inertia flick",
+    "reveal": "morph SVG blob mask"
+  },
+  "icons": {
+    "style": "garis putus-putus",
+    "source": "Bootstrap Icons"
+  },
+  "fonts": {
+    "display": "Atkinson Hyperlegible Mono",
+    "body": "Sofia Sans Extra Condensed",
+    "accent": "Bungee Hairline"
+  },
+  "palette": {
+    "mode": "mid",
+    "harmony": "monochrome",
+    "baseHue": 82,
+    "bg": "oklch(0.71 0.104 82)",
+    "surface": "oklch(0.60 0.110 82)",
+    "text": "oklch(0.16 0.030 82)",
+    "muted": "oklch(0.32 0.040 82)",
+    "accent": "oklch(0.72 0.262 82)",
+    "accent2": "oklch(0.56 0.240 82)",
+    "pop": "oklch(0.87 0.219 297)",
+    "note": "Draf. Wajib cek kontras AA dan rapikan lightness/chroma."
+  },
+  "buildDate": "2026-10-24"
+}

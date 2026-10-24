@@ -1,0 +1,23 @@
+---
+/** ClipboardPapan — papan klip nakes. Gaya garis putus-putus 2px, sudut tajam. */
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+<svg
+  class={cls}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-dasharray="3.5 2.5"
+  stroke-linecap="square"
+  stroke-linejoin="miter"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d="M6 4h12v17H6z" />
+  <path d="M9 4V2h6v2" />
+  <path d="M9 10h6M9 14h6M9 18h4" stroke-dasharray="2 2" />
+</svg>

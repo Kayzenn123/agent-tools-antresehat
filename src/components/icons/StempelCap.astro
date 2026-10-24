@@ -1,0 +1,24 @@
+---
+/** StempelCap — cap stempel. Gaya garis putus-putus 2px, sudut tajam. */
+interface Props {
+  class?: string;
+}
+const { class: cls = '' } = Astro.props;
+---
+<svg
+  class={cls}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-dasharray="3.5 2.5"
+  stroke-linecap="square"
+  stroke-linejoin="miter"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d="M9 3h6v4H9z" />
+  <path d="M12 7v3" />
+  <path d="M7 10h10l1 5H6z" />
+  <path d="M4 18h16v3H4z" />
+</svg>
