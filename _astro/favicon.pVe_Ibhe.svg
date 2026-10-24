@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Karcis antrean bernomor AntreSehat: garis putus-putus, sudut tajam -->
+  <rect x="2" y="2" width="60" height="60" fill="#c9bd8a"/>
+  <rect x="8" y="18" width="48" height="28" fill="#e8e4cf" stroke="#2a2b1e" stroke-width="3"/>
+  <line x1="40" y1="18" x2="40" y2="46" stroke="#2a2b1e" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="24" y="38" text-anchor="middle" font-family="monospace" font-size="12" font-weight="bold" fill="#2a2b1e">A-04</text>
+  <text x="48" y="38" text-anchor="middle" font-family="monospace" font-size="12" font-weight="bold" fill="#6b4fa1">2</text>
+  <rect x="8" y="18" width="48" height="28" fill="none" stroke="#6b4fa1" stroke-width="1" stroke-dasharray="2 4" opacity="0.6"/>
+</svg>

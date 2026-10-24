@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://antreshat.vercel.app/sitemap-index.xml
